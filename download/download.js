@@ -18,15 +18,11 @@ http.createServer(async function(req,res){
             return
         }
         // 解析传入的url
+        console.log(link)
         let linkUrl = url.parse(link)
         // 如果传入的参数不正确,则一样返回如下信息
         if(!linkUrl.protocol){
-            res.writeHead(404)
-            res.end(`
-                url 参数是必须的,正确的格式是 : https://xxxx.com/?url=yoururl
-                <br/>
-                Please input url as : http://xxxx.com/?url=yoururl . And url is require.  
-            `)
+            fs.createReadStream('./index.html').pipe(res)
             return
         }
         // 正确则解析url的后缀,没有后缀则默认打开页面
